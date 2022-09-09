@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+echo "deploy pod in zone-c"
+kubectl apply -f bin/mobilenet/deployment/mobilenet-pod-zone-c.yaml
+
+echo "deploy pod in zone-a"
+kubectl apply -f bin/mobilenet/deployment/mobilenet-pod-zone-a.yaml
+
+echo "deploy pod in zone-b"
+kubectl apply -f bin/mobilenet/deployment/mobilenet-pod-zone-b.yaml
+
+
+echo "wait till pods spawn"
+kubectl wait --for=condition=ready pod -l app=mobilenet
+
+echo "init etcd"
+./bin/mobilenet/bin/init_clustered_etcd_load_balancer.sh

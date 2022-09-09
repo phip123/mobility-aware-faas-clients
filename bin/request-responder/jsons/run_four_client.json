@@ -1,0 +1,20 @@
+{
+  "scale": false,
+  "lb": false,
+  "wg": [
+    [
+      "eb-c-vm-0",
+      500
+    ]
+  ],
+  "script": "run_four_client.sh",
+  "client_zones": [
+    "zone-b"
+  ],
+  "service": {
+    "name": "request-respond",
+    "duration": 10,
+    "type": "static",
+    "cores": 1
+  }
+}

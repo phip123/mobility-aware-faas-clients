@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mobilenet-deployment-c
+  labels:
+    app: mobilenet
+    ether.edgerun.io/function: mobilenet
+    type: mobilenet-fn
+    ether.edgerun.io/zone: zone-c
+spec:
+  nodeSelector:
+    ether.edgerun.io/zone: zone-c
+    node-role.kubernetes.io/worker: "true"
+  containers:
+  - image: aicg4t1/mobilenet-inference:1.1
+    imagePullPolicy: Always
+    name: mobilenet
+    ports:
+    -  containerPort: 8080
+    resources:
+      requests:
+        memory: "250Mi"
+        cpu: "1000m"
+    env:
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      - name: MODEL_STORAGE
+        value: local
+      - name: MODEL_FILE
+        value: /home/app/function/data/mobilenet.tflite
+      - name: LABELS_FILE
+        value: /home/app/function/data/labels.txt
+      - name: IMAGE_STORAGE
+        value: request

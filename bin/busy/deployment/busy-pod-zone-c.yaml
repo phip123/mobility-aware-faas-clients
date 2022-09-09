@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busy-deployment-c
+  labels:
+    app: busy
+    ether.edgerun.io/function: busy
+    type: busy-fn
+    ether.edgerun.io/zone: zone-c
+spec:
+  nodeSelector:
+    ether.edgerun.io/zone: zone-c
+    node-role.kubernetes.io/worker: "true"
+  containers:
+  - image: aicg4t1/busy-python:1.0.2
+    imagePullPolicy: Always
+    name: busy
+    ports:
+    -  containerPort: 8080
+    resources:
+      requests:
+        memory: "250Mi"
+        cpu: "1000m"
+    env:
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName

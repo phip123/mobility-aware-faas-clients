@@ -1,0 +1,23 @@
+{
+  "scale": true,
+  "lb": true,
+  "wg": [
+    [
+      "eb-c-vm-0",
+      30
+    ],
+    [
+      "eb-gateway",
+      15
+    ]
+  ],
+  "script": "run_twentytwo_sine_clients_mixed_zone.sh",
+  "client_zones": [
+    "zone-b",
+    "zone-a"
+  ],
+  "service": {
+    "name": "busy",
+    "wait_ms": 50
+  }
+}

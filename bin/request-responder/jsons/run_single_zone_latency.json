@@ -1,0 +1,20 @@
+{
+  "scale": false,
+  "lb": false,
+  "n": 20,
+  "ia": 0.5,
+  "wg": [
+
+  ],
+  "script": "run_single_zone_latency.sh",
+  "client_zones": [
+    "zone-b",
+    "zone-a"
+  ],
+  "service": {
+    "name": "request-respond",
+    "duration": 100,
+    "type": "static",
+    "cores": 0
+  }
+}

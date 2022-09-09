@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: request_responder_250
+  name: request-responder-250-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: request-responder-250
+  template:
+    metadata:
+      labels:
+        app: request-responder-250
+        ether.edgerun.io/function: request_responder_250
+        type: request-responder-250-fn
+    spec:
+      nodeSelector:
+        ether.edgerun.io/zone: zone-c
+      containers:
+      - image: aicg4t1/responder:1.0.1
+        imagePullPolicy: Always
+        name: request-responder
+        ports:
+        -  containerPort: 8080
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "1000m"
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName

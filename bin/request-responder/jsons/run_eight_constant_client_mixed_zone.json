@@ -1,0 +1,21 @@
+{
+  "scale": true,
+  "lb": true,
+  "wg": [
+    [
+      "eb-c-vm-0",
+      500
+    ]
+  ],
+  "script": "run_eight_constant_clients_mixed_zone.sh",
+  "client_zones": [
+    "zone-b",
+    "zone-a"
+  ],
+  "service": {
+    "name": "request-respond",
+    "duration": 50,
+    "type": "static",
+    "cores": 1
+  }
+}
